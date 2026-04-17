@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    @apply text-gray-900 bg-gray-50 font-sans;
+    --cv-ink: #111111;
+    --cv-body: #3f3f46;
+    --cv-muted: #71717a;
+    --cv-faint: #d4d4d8;
+    --cv-accent: #2563eb;
+    --cv-surface: #fafafa;
+
+    /* Monograph layout tokens */
+    --mono-paper: #FAFAF7;
+    --mono-ink: #0A0A0A;
+    --mono-body: #1F1F1F;
+    --mono-muted: #6B6B6B;
+    --mono-hair: #D9D6CC;
+    --mono-edge: #E8E4D8;
+    --mono-accent: #8B1E2A;
+
+    --mono-gutter: 20px;
+    --mono-rail-w: 84px;
+    --mono-section-gap: 44px;
+    --mono-entry-gap: 32px;
+  }
+
+  body {
+    @apply min-w-[320px] min-h-screen m-0;
+  }
+}
+
+@layer utilities {
+  .mono-smallcaps {
+    font-family: "Inter", "IBM Plex Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+  }
+  .mono-tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .mono-leader {
+    flex: 1;
+    border-bottom: 1.5px dotted var(--mono-hair);
+    transform: translateY(-4px);
+    margin: 0 10px;
+    min-width: 24px;
+  }
+  .mono-rule-heading {
+    height: 2px;
+    background: var(--mono-ink);
+    width: 100%;
+  }
+  .mono-rule-hair {
+    height: 1px;
+    background: var(--mono-ink);
+  }
+  .mono-dropcap-paragraph::first-letter {
+    float: left;
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 700;
+    font-size: 54px;
+    line-height: 0.9;
+    color: var(--mono-accent);
+    margin: 6px 10px 0 -6px;
+    padding: 0;
+  }
+}

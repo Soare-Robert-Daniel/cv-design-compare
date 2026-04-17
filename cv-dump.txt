@@ -1,0 +1,49 @@
+Contact
+soarerobert17@gmail.com
+www.linkedin.com/in/soare-robertdaniel-949974151 (LinkedIn)
+robertsoare.xyz/ (Personal)
+Top Skills
+MySQL
+Amazon Web Services (AWS)
+User Experience (UX)
+Soare Robert Daniel
+Software Developer
+Romania
+Summary
+Software developer with over 5 years of professional experience in
+web development.
+Experience
+Themeisle
+Software Developer
+July 2020 - Present (5 years 10 months)
+Romania
+Building products for the WordPress ecosystem that help small business
+owners and freelancers.
+Responsibilities:
+- Developing and maintaining WordPress plugins and themes used by almost
+1 million users
+- Building internal tools to increase automation and improve team productivity
+- Developing strategic plans aligned with company goals and growth initiatives
+- Implementing responsive UI designs and user-friendly interfaces
+- Collaborating with cross-functional teams to deliver product features
+- Mentoring and onboarding new team members
+- Participating in technical interviews and recruiting processes
+- Writing clean, maintainable, and well-documented code
+- Participating in code reviews and knowledge sharing
+- Building serverless services
+- Building agentic workflow for faster development speed
+Tech Stack:
+- Backend: PHP, Node.js, Bun, WordPress core
+- Frontend: JavaScript/Typescript (React, jQuery), HTML5, CSS3, SASS/
+SCSS/Tailwind
+Page 1 of 2
+- Databases: MySQL
+- DevOps: Docker, Git, GitHub Actions
+- Cloud: Amazon Web Services (AWS)
+Education
+University POLITEHNICA of Bucharest
+Master's degree, Computer Graphics · (October 2021 - July 2023)
+Facultatea de Științe Aplicate , Universitatea Politehnica din
+Bucuresti
+Engineer's degree, Engineering · (2017 - 2021)
+Page 2 of 2
