@@ -13,6 +13,8 @@ const categories: { key: FontPairing["category"] | "all"; label: string }[] = [
 const layouts: { key: CVVariant; label: string }[] = [
   { key: "classic", label: "Classic" },
   { key: "monograph", label: "Monograph" },
+  { key: "terminal", label: "Terminal" },
+  { key: "hardware", label: "Hardware" },
 ];
 
 export function FontComparator() {

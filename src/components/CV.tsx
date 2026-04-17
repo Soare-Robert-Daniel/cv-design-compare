@@ -2,8 +2,10 @@ import { cvData, type CVData } from "../cv-data";
 import { CVHeader } from "./CVHeader";
 import { CVSection } from "./CVSection";
 import { MonographCV } from "./Monograph/MonographCV";
+import { TerminalCV } from "./TerminalCV";
+import { HardwareCV } from "./HardwareCV";
 
-export type CVVariant = "classic" | "monograph";
+export type CVVariant = "classic" | "monograph" | "terminal" | "hardware";
 
 interface CVProps {
   data?: CVData;
@@ -23,6 +25,28 @@ export function CV({
   if (variant === "monograph") {
     return (
       <MonographCV
+        data={data}
+        headingFont={headingFont}
+        bodyFont={bodyFont}
+        scale={scale}
+      />
+    );
+  }
+  
+  if (variant === "terminal") {
+    return (
+      <TerminalCV
+        data={data}
+        headingFont={headingFont}
+        bodyFont={bodyFont}
+        scale={scale}
+      />
+    );
+  }
+
+  if (variant === "hardware") {
+    return (
+      <HardwareCV
         data={data}
         headingFont={headingFont}
         bodyFont={bodyFont}
