@@ -33,6 +33,20 @@
     --bp-muted: #9FB3C8;
     --bp-border: #334E68;
     --bp-border-strong: #486581;
+
+    /* Streamline layout tokens */
+    --sl-bg: #FDFBF7;
+    --sl-ink: #0A192F;
+    --sl-gold: #C5A059;
+    --sl-border: #D1D1C7;
+    --sl-muted: #334E68;
+
+    /* IBM 3270 Terminal tokens */
+    --ibm-bg: #000000;
+    --ibm-green: #00ff00;
+    --ibm-green-dim: #006600;
+    --ibm-amber: #ffb000;
+    --ibm-amber-dim: #664400;
   }
 
   body {

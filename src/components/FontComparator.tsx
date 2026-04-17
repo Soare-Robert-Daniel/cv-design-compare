@@ -17,6 +17,7 @@ const layouts: { key: CVVariant; label: string }[] = [
   { key: "terminal", label: "Terminal" },
   { key: "hardware", label: "Hardware" },
   { key: "blueprint", label: "Blueprint" },
+  { key: "streamline", label: "Streamline" },
 ];
 
 export function FontComparator() {

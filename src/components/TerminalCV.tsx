@@ -5,119 +5,253 @@ interface TerminalCVProps {
   headingFont?: string;
   bodyFont?: string;
   scale?: number;
+  phosphor?: "green" | "amber";
 }
+
+// Terminal phosphor colors
+const PHOSPHOR = {
+  green: {
+    bg: "#0a0a0a",
+    fg: "#00ff41",
+    dim: "#008f11",
+    border: "#003b00",
+  },
+  amber: {
+    bg: "#0a0a0a",
+    fg: "#ffb000",
+    dim: "#b27800",
+    border: "#3b2800",
+  },
+};
 
 export function TerminalCV({
   data,
   headingFont,
   bodyFont,
   scale = 1,
+  phosphor = "green",
 }: TerminalCVProps) {
-  const headingStyle: React.CSSProperties = headingFont
-    ? { fontFamily: headingFont }
-    : { fontFamily: 'monospace' };
+  const colors = PHOSPHOR[phosphor];
   const bodyStyle: React.CSSProperties = bodyFont
     ? { fontFamily: bodyFont }
-    : { fontFamily: 'monospace' };
+    : { fontFamily: '"IBM Plex Mono", "Fira Code", "SF Mono", monospace' };
+
+  const fontSize = 13 * scale;
 
   return (
     <div
-      className="p-8 rounded-lg shadow-sm border overflow-hidden relative"
       style={{
         ...bodyStyle,
-        backgroundColor: "#050505",
-        color: "#33ff00",
-        borderColor: "#33ff00",
-        fontSize: `${14 * scale}px`,
-        lineHeight: 1.6,
-        transformOrigin: "top left",
-        textShadow: "0 0 5px rgba(51, 255, 0, 0.4)",
+        backgroundColor: colors.bg,
+        color: colors.fg,
+        fontSize: `${fontSize}px`,
+        lineHeight: 1.5,
+        display: "flex",
+        minHeight: "100%",
       }}
     >
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-500 via-transparent to-transparent"></div>
-      
-      {/* Header */}
-      <div className="mb-8 border-b-2 border-dashed border-[#33ff00] pb-6">
-        <div style={headingStyle} className="text-4xl font-bold mb-2 uppercase tracking-wider">
-          {data.contact.name}
+      {/* Left Sidebar - Contact */}
+      <aside
+        style={{
+          width: `${220 * scale}px`,
+          padding: `${24 * scale}px`,
+          borderRight: `1px solid ${colors.border}`,
+          display: "flex",
+          flexDirection: "column",
+          gap: `${20 * scale}px`,
+        }}
+      >
+        {/* Name Header */}
+        <div style={{ marginBottom: `${8 * scale}px` }}>
+          <div
+            style={{
+              fontSize: `${18 * scale}px`,
+              fontWeight: 600,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.2,
+              marginBottom: `${4 * scale}px`,
+            }}
+          >
+            {data.contact.name}
+          </div>
+          <div style={{ color: colors.dim, fontSize: `${fontSize}px` }}>
+            {data.contact.role}
+          </div>
         </div>
-        <div className="text-xl mb-4 opacity-90">
-          <span className="opacity-50">~%</span> {data.contact.role}
-        </div>
-        <div className="flex flex-col gap-1 text-sm opacity-80">
-          <div><span className="opacity-50">USR:</span> {data.contact.email}</div>
-          <div><span className="opacity-50">LOC:</span> {data.contact.location}</div>
-          <div><span className="opacity-50">NET:</span> {data.contact.website} | {data.contact.linkedin}</div>
-        </div>
-      </div>
 
-      {/* Summary */}
-      <div className="mb-8">
-        <div style={headingStyle} className="text-xl font-bold mb-3 uppercase flex items-center gap-2">
-          <span className="opacity-50 text-sm">root@sys:~#</span> cat summary.txt
+        {/* Contact Fields */}
+        <div style={{ display: "flex", flexDirection: "column", gap: `${6 * scale}px` }}>
+          <Field label="LOC" value={data.contact.location} colors={colors} />
+          <Field label="MAIL" value={data.contact.email} colors={colors} />
+          <Field label="WEB" value={data.contact.website} colors={colors} />
+          <Field label="IN" value={data.contact.linkedin.split("/").pop() || data.contact.linkedin} colors={colors} />
         </div>
-        <p className="pl-4 border-l border-[#33ff00] opacity-90 leading-relaxed">
+
+        {/* Skills */}
+        <div style={{ marginTop: "auto" }}>
+          <div style={{ color: colors.dim, marginBottom: `${6 * scale}px`, fontSize: `${11 * scale}px` }}>
+            SKILLS
+          </div>
+          <div style={{ fontSize: `${11 * scale}px`, lineHeight: 1.4 }}>
+            {data.skills.map((skill, i) => (
+              <span key={skill}>
+                {skill}
+                {i < data.skills.length - 1 && <span style={{ color: colors.dim }}> · </span>}
+              </span>
+            ))}
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main style={{ flex: 1, padding: `${24 * scale}px` }}>
+        {/* Summary */}
+        <Section title="SUMMARY" colors={colors} scale={scale} />
+        <div style={{ marginBottom: `${20 * scale}px`, color: colors.dim }}>
           {data.summary}
-        </p>
-      </div>
-
-      {/* Experience */}
-      <div className="mb-8">
-        <div style={headingStyle} className="text-xl font-bold mb-4 uppercase flex items-center gap-2">
-          <span className="opacity-50 text-sm">root@sys:~#</span> ./run_experience.sh
         </div>
-        <div className="space-y-6 pl-4">
+
+        {/* Experience */}
+        <Section title="EXPERIENCE" colors={colors} scale={scale} />
+        <div style={{ display: "flex", flexDirection: "column", gap: `${16 * scale}px` }}>
           {data.experience.map((exp, idx) => (
-            <div key={idx} className="relative">
-              <div className="flex items-baseline justify-between mb-1">
-                <div className="font-bold text-lg">[{exp.company}]</div>
-                <div className="text-xs opacity-70">uptime: {exp.period}</div>
+            <div key={idx}>
+              {/* Company Header */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                  marginBottom: `${4 * scale}px`,
+                }}
+              >
+                <span style={{ fontWeight: 600 }}>{exp.company}</span>
+                <span style={{ color: colors.dim, fontSize: `${11 * scale}px` }}>
+                  {exp.period}
+                </span>
               </div>
-              <div className="text-sm opacity-90 mb-2 italic">
-                role: {exp.role} @ {exp.location}
+
+              {/* Role & Location */}
+              <div
+                style={{
+                  color: colors.dim,
+                  fontSize: `${11 * scale}px`,
+                  marginBottom: `${8 * scale}px`,
+                }}
+              >
+                {exp.role} · {exp.location}
               </div>
-              <ul className="list-none space-y-1 mb-3 opacity-80 text-sm">
-                {exp.responsibilities.map((r, i) => (
-                  <li key={i} className="flex gap-2">
-                    <span className="opacity-50">{'>'}</span> <span>{r}</span>
-                  </li>
-                ))}
-              </ul>
-              
-              <div className="text-xs opacity-70 border border-[#33ff00] p-3 rounded bg-[#33ff00]/5">
-                <div className="mb-2 font-bold uppercase underline">System Config (Stack):</div>
-                {Object.entries(exp.techStack).map(([category, items]) => (
-                  <div key={category} className="flex gap-2 mb-1">
-                    <span className="w-24 uppercase font-bold">{category}:</span>
-                    <span>{items.join(", ")}</span>
+
+              {/* Responsibilities */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: `${2 * scale}px`,
+                  marginBottom: `${8 * scale}px`,
+                  paddingLeft: `${12 * scale}px`,
+                }}
+              >
+                {exp.responsibilities.slice(0, 5).map((r, i) => (
+                  <div key={i} style={{ fontSize: `${12 * scale}px` }}>
+                    <span style={{ color: colors.dim }}>- </span>
+                    {r}
                   </div>
                 ))}
               </div>
+
+              {/* Tech Stack */}
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: `${8 * scale}px`,
+                  fontSize: `${11 * scale}px`,
+                }}
+              >
+                {Object.entries(exp.techStack).map(([cat, items]) => (
+                  items.length > 0 && (
+                    <span key={cat}>
+                      <span style={{ color: colors.dim }}>{cat}:</span>{" "}
+                      {items.join(", ")}
+                    </span>
+                  )
+                ))}
+              </div>
             </div>
           ))}
         </div>
-      </div>
 
-      {/* Education */}
-      <div className="mb-8">
-        <div style={headingStyle} className="text-xl font-bold mb-4 uppercase flex items-center gap-2">
-          <span className="opacity-50 text-sm">root@sys:~#</span> tail -f education.log
-        </div>
-        <div className="space-y-4 pl-4 border-l border-[#33ff00] border-dashed">
+        {/* Education */}
+        <Section title="EDUCATION" colors={colors} scale={scale} style={{ marginTop: `${20 * scale}px` }} />
+        <div style={{ display: "flex", flexDirection: "column", gap: `${8 * scale}px` }}>
           {data.education.map((edu, idx) => (
-            <div key={idx} className="relative pl-4">
-              <div className="absolute left-[-5px] top-1.5 w-2 h-2 bg-[#33ff00]"></div>
-              <div className="font-bold">sys.edu.{edu.institution.replace(/\s+/g, "_").toLowerCase()}</div>
-              <div className="text-sm opacity-90">{edu.degree}</div>
-              <div className="text-xs opacity-70">{edu.period}</div>
+            <div key={idx}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                }}
+              >
+                <span style={{ fontWeight: 500 }}>{edu.institution}</span>
+                <span style={{ color: colors.dim, fontSize: `${11 * scale}px` }}>
+                  {edu.period}
+                </span>
+              </div>
+              <div style={{ color: colors.dim, fontSize: `${12 * scale}px` }}>
+                {edu.degree}
+              </div>
             </div>
           ))}
         </div>
-      </div>
+      </main>
+    </div>
+  );
+}
 
-      <div className="mt-8 pt-4 border-t-2 border-dashed border-[#33ff00] text-center opacity-50 text-xs flex items-center justify-center gap-2">
-        <span className="animate-pulse w-2 h-4 bg-[#33ff00] inline-block"></span> SYSTEM HALTED.
-      </div>
+function Field({
+  label,
+  value,
+  colors,
+}: {
+  label: string;
+  value: string;
+  colors: (typeof PHOSPHOR)["green"];
+}) {
+  return (
+    <div style={{ fontSize: "inherit" }}>
+      <span style={{ color: colors.dim, marginRight: "0.5em" }}>{label}</span>
+      <span style={{ wordBreak: "break-all" }}>{value}</span>
+    </div>
+  );
+}
+
+function Section({
+  title,
+  colors,
+  scale,
+  style,
+}: {
+  title: string;
+  colors: (typeof PHOSPHOR)["green"];
+  scale: number;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <div
+      style={{
+        marginBottom: `${10 * scale}px`,
+        display: "flex",
+        alignItems: "center",
+        gap: `${8 * scale}px`,
+        ...style,
+      }}
+    >
+      <span style={{ fontWeight: 600, letterSpacing: "0.05em" }}>{title}</span>
+      <span style={{ color: colors.border, flex: 1 }}>
+        {"─".repeat(20)}
+      </span>
     </div>
   );
 }

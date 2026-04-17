@@ -5,8 +5,9 @@ import { MonographCV } from "./Monograph/MonographCV";
 import { TerminalCV } from "./TerminalCV";
 import { HardwareCV } from "./HardwareCV";
 import { BlueprintCV } from "./BlueprintCV";
+import { StreamlineCV } from "./StreamlineCV";
 
-export type CVVariant = "classic" | "monograph" | "terminal" | "hardware" | "blueprint";
+export type CVVariant = "classic" | "monograph" | "terminal" | "hardware" | "blueprint" | "streamline";
 
 interface CVProps {
   data?: CVData;
@@ -59,6 +60,17 @@ export function CV({
   if (variant === "blueprint") {
     return (
       <BlueprintCV
+        data={data}
+        headingFont={headingFont}
+        bodyFont={bodyFont}
+        scale={scale}
+      />
+    );
+  }
+
+  if (variant === "streamline") {
+    return (
+      <StreamlineCV
         data={data}
         headingFont={headingFont}
         bodyFont={bodyFont}
