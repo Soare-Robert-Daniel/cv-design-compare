@@ -4,8 +4,9 @@ import { CVSection } from "./CVSection";
 import { MonographCV } from "./Monograph/MonographCV";
 import { TerminalCV } from "./TerminalCV";
 import { HardwareCV } from "./HardwareCV";
+import { BlueprintCV } from "./BlueprintCV";
 
-export type CVVariant = "classic" | "monograph" | "terminal" | "hardware";
+export type CVVariant = "classic" | "monograph" | "terminal" | "hardware" | "blueprint";
 
 interface CVProps {
   data?: CVData;
@@ -47,6 +48,17 @@ export function CV({
   if (variant === "hardware") {
     return (
       <HardwareCV
+        data={data}
+        headingFont={headingFont}
+        bodyFont={bodyFont}
+        scale={scale}
+      />
+    );
+  }
+
+  if (variant === "blueprint") {
+    return (
+      <BlueprintCV
         data={data}
         headingFont={headingFont}
         bodyFont={bodyFont}

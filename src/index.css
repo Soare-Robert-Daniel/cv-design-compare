@@ -23,6 +23,16 @@
     --mono-rail-w: 84px;
     --mono-section-gap: 44px;
     --mono-entry-gap: 32px;
+
+    /* Blueprint layout tokens */
+    --bp-bg: #102A43;
+    --bp-bg-dark: #0A1C2E;
+    --bp-line: #F0F4F8;
+    --bp-grid: #243B53;
+    --bp-accent: #82CFFD;
+    --bp-muted: #9FB3C8;
+    --bp-border: #334E68;
+    --bp-border-strong: #486581;
   }
 
   body {
