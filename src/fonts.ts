@@ -3,7 +3,7 @@
 
 export interface FontPairing {
   name: string;
-  category: "mono-heading" | "sans-clean" | "serif-academic" | "hybrid";
+  category: "mono-heading" | "sans-clean" | "serif-academic" | "hybrid" | "retro-computing";
   headingFont: string;
   bodyFont: string;
   headingFamily: string;
@@ -113,6 +113,14 @@ const fontLoaders: Record<string, () => Promise<unknown>[]> = {
     import("@fontsource/geist-mono/400.css"),
     import("@fontsource/geist-mono/500.css"),
     import("@fontsource/geist-mono/700.css"),
+  ],
+  VT323: () => [import("@fontsource/vt323/400.css")],
+  "Share Tech Mono": () => [import("@fontsource/share-tech-mono/400.css")],
+  "Press Start 2P": () => [import("@fontsource/press-start-2p/400.css")],
+  "Nova Mono": () => [import("@fontsource/nova-mono/400.css")],
+  "Courier Prime": () => [
+    import("@fontsource/courier-prime/400.css"),
+    import("@fontsource/courier-prime/700.css"),
   ],
 };
 
@@ -294,5 +302,52 @@ export const fontPairings: FontPairing[] = [
     headingFamily: '"Merriweather", serif',
     bodyFamily: '"Work Sans", sans-serif',
     fonts: ["Merriweather", "Work Sans"],
+  },
+
+  // Retro computing - golden age of computing fonts
+  {
+    name: "Terminal Age",
+    category: "retro-computing",
+    headingFont: "VT323",
+    bodyFont: "Share Tech Mono",
+    headingFamily: '"VT323", monospace',
+    bodyFamily: '"Share Tech Mono", monospace',
+    fonts: ["VT323", "Share Tech Mono"],
+  },
+  {
+    name: "8-Bit Spec",
+    category: "retro-computing",
+    headingFont: "Press Start 2P",
+    bodyFont: "VT323",
+    headingFamily: '"Press Start 2P", monospace',
+    bodyFamily: '"VT323", monospace',
+    fonts: ["Press Start 2P", "VT323"],
+  },
+  {
+    name: "Mainframe Report",
+    category: "retro-computing",
+    headingFont: "Courier Prime",
+    bodyFont: "IBM Plex Sans",
+    headingFamily: '"Courier Prime", monospace',
+    bodyFamily: '"IBM Plex Sans", sans-serif',
+    fonts: ["Courier Prime", "IBM Plex Sans"],
+  },
+  {
+    name: "Retro Industrial",
+    category: "retro-computing",
+    headingFont: "Share Tech Mono",
+    bodyFont: "Space Mono",
+    headingFamily: '"Share Tech Mono", monospace',
+    bodyFamily: '"Space Mono", monospace',
+    fonts: ["Share Tech Mono", "Space Mono"],
+  },
+  {
+    name: "Nova Terminal",
+    category: "retro-computing",
+    headingFont: "Nova Mono",
+    bodyFont: "Inter",
+    headingFamily: '"Nova Mono", monospace',
+    bodyFamily: '"Inter", sans-serif',
+    fonts: ["Nova Mono", "Inter"],
   },
 ];

@@ -8,6 +8,7 @@ const categories: { key: FontPairing["category"] | "all"; label: string }[] = [
   { key: "sans-clean", label: "Sans Clean" },
   { key: "mono-heading", label: "Mono Heading" },
   { key: "serif-academic", label: "Serif Academic" },
+  { key: "retro-computing", label: "Retro Computing" },
 ];
 
 const layouts: { key: CVVariant; label: string }[] = [
